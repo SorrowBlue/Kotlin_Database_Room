@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.sorrowblue.kdbc"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
 	mavenCentral()
@@ -34,7 +34,7 @@ tasks {
 							"parent" {
 								"groupId"("com.sorrowblue.kdbc")
 								"artifactId"("common")
-								"version"("0.0.1")
+								"version"(version)
 							}
 						}
 					}

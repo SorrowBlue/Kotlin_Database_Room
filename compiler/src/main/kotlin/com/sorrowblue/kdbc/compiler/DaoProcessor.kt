@@ -1,6 +1,5 @@
 package com.sorrowblue.kdbc.compiler
 
-import com.google.auto.common.MoreTypes
 import com.google.auto.service.AutoService
 import com.sorrowblue.kdbc.*
 import com.sorrowblue.kdbc.compiler.ktx.*
@@ -28,7 +27,7 @@ class DaoProcessor : AbstractProcessor() {
 	override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
 		roundEnv.getElementsAnnotatedWith(Dao::class.java).forEach {
 			if (it.kind != ElementKind.INTERFACE) {
-				processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "Only classes can be annotated")
+				processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "Only interfaces can be annotated")
 				return true
 			}
 			processAnnotation(it)

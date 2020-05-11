@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.sorrowblue.kdbc"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
 	mavenCentral()
@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-//	implementation(project(":common"))
-	implementation("com.sorrowblue.kdbc:common:0.0.1")
+	implementation(project(":common"))
+//	implementation("com.sorrowblue.kdbc:common:$version")
 	implementation(kotlin("stdlib-jdk8"))
 	implementation("com.squareup:kotlinpoet:1.5.0")
 	implementation("com.google.auto.service:auto-service:1.0-rc6")
@@ -41,7 +41,7 @@ tasks {
 							"parent" {
 								"groupId"("com.sorrowblue.kdbc")
 								"artifactId"("compiler")
-								"version"("0.0.1")
+								"version"(version)
 							}
 						}
 					}

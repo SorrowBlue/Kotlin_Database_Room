@@ -13,9 +13,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-//    implementation(project(":common"))
-    implementation("com.sorrowblue.kdbc:common:0.0.1")
+    implementation(project(":common"))
+//    implementation("com.sorrowblue.kdbc:common:0.0.1")
     kapt(project(":compiler"))
+    implementation("org.postgresql:postgresql:42.2.12")
 }
 
 tasks {

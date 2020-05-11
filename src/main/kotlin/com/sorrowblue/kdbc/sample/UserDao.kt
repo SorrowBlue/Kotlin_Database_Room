@@ -9,7 +9,7 @@ interface UserDao {
 	fun getAll(): List<User>
 
 	@Query("SELECT * FROM users WHERE id = :id;")
-	fun get(id: Int, name: String): User?
+	fun get(id: Int): User?
 
 	@Delete
 	fun delete(user: User): Int
