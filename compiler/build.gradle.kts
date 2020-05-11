@@ -9,13 +9,12 @@ version = "1.0.0"
 
 repositories {
 	mavenCentral()
-	maven { url = uri("http://sorrowblue.github.io/Kotlin Database Room/repository") }
+	maven { url = uri("http://sorrowblue.github.io/Kotlin_Database_Room/repository") }
 }
 
 dependencies {
 	implementation(project(":common"))
 	implementation(kotlin("stdlib-jdk8"))
-	implementation("com.sorrowblue.")
 	implementation("com.squareup:kotlinpoet:1.5.0")
 	implementation("com.google.auto.service:auto-service:1.0-rc6")
 	kapt("com.google.auto.service:auto-service:1.0-rc6")
