@@ -8,11 +8,13 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://raw.githubusercontent.com/SorrowBlue/Kotlin_Database_Room/master/repository") }
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation(project(":common"))
+//    implementation(project(":common"))
+    implementation("com.sorrowblue.kdbc:common:0.0.1")
     kapt(project(":compiler"))
 }
 
