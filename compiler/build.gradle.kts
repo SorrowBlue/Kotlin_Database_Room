@@ -9,12 +9,12 @@ version = "0.1.0"
 
 repositories {
 	mavenCentral()
-	maven { url = uri("https://raw.githubusercontent.com/SorrowBlue/Kotlin_Database_Room/master/repository") }
+	maven { url = uri("https://sorrowblue.com/Kotlin_Database_Room") }
 }
 
 dependencies {
-	implementation(project(":common"))
-//	api("com.sorrowblue.kdbr:common:$version")
+//	implementation(project(":common"))
+	implementation("com.sorrowblue.kdbr:common:$version")
 	implementation(kotlin("stdlib-jdk8"))
 	implementation("com.squareup:kotlinpoet:1.5.0")
 	implementation("com.google.auto.service:auto-service:1.0-rc6")
