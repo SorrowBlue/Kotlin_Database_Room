@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.sorrowblue.kdbc"
-version = "0.0.2"
+version = "0.0.3"
 
 repositories {
 	mavenCentral()
@@ -14,10 +14,10 @@ repositories {
 
 dependencies {
 //	implementation(project(":common"))
-	implementation("com.sorrowblue.kdbc:common:$version")
-	implementation(kotlin("stdlib-jdk8"))
-	implementation("com.squareup:kotlinpoet:1.5.0")
-	implementation("com.google.auto.service:auto-service:1.0-rc6")
+	api("com.sorrowblue.kdbc:common:$version")
+	api(kotlin("stdlib-jdk8"))
+	api("com.squareup:kotlinpoet:1.5.0")
+	api("com.google.auto.service:auto-service:1.0-rc6")
 	kapt("com.google.auto.service:auto-service:1.0-rc6")
 }
 
