@@ -3,7 +3,7 @@ plugins {
 	maven
 }
 
-group = "com.sorrowblue.kdbc"
+group = "com.sorrowblue.kdbr"
 version = "0.1.0"
 
 repositories {
@@ -34,7 +34,7 @@ tasks {
 					pom.project {
 						withGroovyBuilder {
 							"parent" {
-								"groupId"("com.sorrowblue.kdbc")
+								"groupId"("com.sorrowblue.kdbr")
 								"artifactId"("common")
 								"version"(version)
 							}

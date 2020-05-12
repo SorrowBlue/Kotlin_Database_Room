@@ -4,8 +4,8 @@ plugins {
 	maven
 }
 
-group = "com.sorrowblue.kdbc"
-version = "0.0.3"
+group = "com.sorrowblue.kdbr"
+version = "0.1.0"
 
 repositories {
 	mavenCentral()
@@ -14,10 +14,10 @@ repositories {
 
 dependencies {
 	implementation(project(":common"))
-//	api("com.sorrowblue.kdbc:common:$version")
-	api(kotlin("stdlib-jdk8"))
-	api("com.squareup:kotlinpoet:1.5.0")
-	api("com.google.auto.service:auto-service:1.0-rc6")
+//	api("com.sorrowblue.kdbr:common:$version")
+	implementation(kotlin("stdlib-jdk8"))
+	implementation("com.squareup:kotlinpoet:1.5.0")
+	implementation("com.google.auto.service:auto-service:1.0-rc6")
 	kapt("com.google.auto.service:auto-service:1.0-rc6")
 }
 
@@ -39,7 +39,7 @@ tasks {
 					pom.project {
 						withGroovyBuilder {
 							"parent" {
-								"groupId"("com.sorrowblue.kdbc")
+								"groupId"("com.sorrowblue.kdbr")
 								"artifactId"("compiler")
 								"version"(version)
 							}
