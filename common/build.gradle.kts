@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.sorrowblue.kdbc"
-version = "0.0.3"
+version = "0.1.0"
 
 repositories {
 	mavenCentral()
@@ -12,6 +12,8 @@ repositories {
 
 dependencies {
 	api(kotlin("stdlib-jdk8"))
+	api("com.squareup:kotlinpoet:1.5.0")
+	api("com.google.auto.service:auto-service:1.0-rc6")
 }
 
 tasks {
@@ -26,7 +28,7 @@ tasks {
 			withConvention(MavenRepositoryHandlerConvention::class) {
 				mavenDeployer {
 					withGroovyBuilder {
-						val repo = File(rootDir, "repository")
+						val repo = File(rootDir, "docs")
 						"repository"("url" to uri(repo.absolutePath))
 					}
 					pom.project {

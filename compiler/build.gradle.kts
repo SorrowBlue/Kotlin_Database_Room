@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-//	implementation(project(":common"))
-	api("com.sorrowblue.kdbc:common:$version")
+	implementation(project(":common"))
+//	api("com.sorrowblue.kdbc:common:$version")
 	api(kotlin("stdlib-jdk8"))
 	api("com.squareup:kotlinpoet:1.5.0")
 	api("com.google.auto.service:auto-service:1.0-rc6")
