@@ -33,7 +33,7 @@ tasks {
 			withConvention(MavenRepositoryHandlerConvention::class) {
 				mavenDeployer {
 					withGroovyBuilder {
-						val repo = File(rootDir, "repository")
+						val repo = File(rootDir, "docs")
 						"repository"("url" to uri(repo.absolutePath))
 					}
 					pom.project {
