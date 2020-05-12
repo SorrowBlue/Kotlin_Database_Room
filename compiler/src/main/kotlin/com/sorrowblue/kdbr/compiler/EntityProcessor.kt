@@ -90,7 +90,7 @@ class EntityProcessor : AbstractProcessor() {
 
 		objectBuilder.addFunction(resultFunction(element, columnNames))
 		fileBuilder.addType(objectBuilder.build())
-		fileBuilder.addImport("com.sorrowblue.kdbc.ktx", "get")
+		fileBuilder.addImport("com.sorrowblue.kdbr.ktx", "get")
 		fileBuilder.build().writeTo(File(processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME]!!))
 	}
 

@@ -96,7 +96,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement("val statement = connection.prepareStatement(sql)")
 				addStatement(
 					"statement.%M(*$it.flatMap { %T.values(it) }.toTypedArray())",
-					MemberName("com.sorrowblue.kdbc.ktx", "setAll"),
+					MemberName("com.sorrowblue.kdbr.ktx", "setAll"),
 					className
 				)
 			} else if (it.asType().isCollection) {
@@ -128,7 +128,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement("val statement = connection.prepareStatement(sql)")
 				addStatement(
 					"statement.%M(*$it.flatMap { %T.values(it) }.toTypedArray())",
-					MemberName("com.sorrowblue.kdbc.ktx", "setAll"),
+					MemberName("com.sorrowblue.kdbr.ktx", "setAll"),
 					className
 				)
 			} else {
@@ -155,7 +155,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement("val statement = connection.prepareStatement(sql)")
 				addStatement(
 					"statement.%M(*%T.values($it).toTypedArray())",
-					MemberName("com.sorrowblue.kdbc.ktx", "setAll"),
+					MemberName("com.sorrowblue.kdbr.ktx", "setAll"),
 					className
 				)
 			}
@@ -164,7 +164,7 @@ class DaoProcessor : AbstractProcessor() {
 			returns(Int::class.java)
 			"return"
 		} else ""
-		addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbc.ktx", "update"))
+		addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbr.ktx", "update"))
 	}
 
 	private fun FunSpec.Builder.updateMethod(element: ExecutableElement) {
@@ -187,13 +187,13 @@ class DaoProcessor : AbstractProcessor() {
 			addStatement("val statement = connection.prepareStatement(sql)")
 			addStatement(
 				"statement.%1M(*%2T.values($it).plus(%2T.primaryValue($it)).toTypedArray())",
-				MemberName("com.sorrowblue.kdbc.ktx", "setAll"), className
+				MemberName("com.sorrowblue.kdbr.ktx", "setAll"), className
 			)
 			val isReturn = if (element.returnType.isInt) {
 				returns(Int::class.java)
 				"return"
 			} else ""
-			addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbc.ktx", "update"))
+			addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbr.ktx", "update"))
 		}
 	}
 
@@ -217,7 +217,7 @@ class DaoProcessor : AbstractProcessor() {
 			returns(Int::class.java)
 			"return"
 		} else ""
-		addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbc.ktx", "update"))
+		addStatement("$isReturn statement.%M()", MemberName("com.sorrowblue.kdbr.ktx", "update"))
 
 	}
 
@@ -234,8 +234,8 @@ class DaoProcessor : AbstractProcessor() {
 		statementSetAllCodeBlock(query.sql, element)
 		addStatement(
 			if (returnType.isCollection) "return statement.%M { it.%M(%T::result) }" else "return statement.%M { it.%M(%T::result) }.firstOrNull()",
-			MemberName("com.sorrowblue.kdbc.ktx", "query"),
-			MemberName("com.sorrowblue.kdbc.ktx", "map"),
+			MemberName("com.sorrowblue.kdbr.ktx", "query"),
+			MemberName("com.sorrowblue.kdbr.ktx", "map"),
 			entityClass
 		)
 		returns(
@@ -258,7 +258,7 @@ class DaoProcessor : AbstractProcessor() {
 		}
 		return CodeBlock.builder().add(
 			"statement.%M(%L)",
-			MemberName("com.sorrowblue.kdbc.ktx", "setAll"),
+			MemberName("com.sorrowblue.kdbr.ktx", "setAll"),
 			placeHolders.joinToString(",")
 		).build()
 	}

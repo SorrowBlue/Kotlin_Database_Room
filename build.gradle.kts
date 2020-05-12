@@ -3,12 +3,12 @@ plugins {
     kotlin("kapt")  version "1.3.72"
 }
 
-group = "com.sorrowblue.kdbc"
+group = "com.sorrowblue.kdbr"
 version = "1.0.0"
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://raw.githubusercontent.com/SorrowBlue/Kotlin_Database_Room/master/repository") }
+    maven { url = uri("https://sorrowblue.com/Kotlin_Database_Room") }
 }
 
 dependencies {
