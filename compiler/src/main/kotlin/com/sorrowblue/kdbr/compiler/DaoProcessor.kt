@@ -231,7 +231,7 @@ class DaoProcessor : AbstractProcessor() {
 		addStatement("val sql = %S", regex.replace(query.sql, "?"))
 		addStatement("println(sql)")
 		addStatement("val statement = connection.prepareStatement(sql)")
-		statementSetAllCodeBlock(query.sql, element)
+		statementSetAllCodeBlock(query.sql, element)?.let { addCode(it) }
 		addStatement(
 			if (returnType.isCollection) "return statement.%M { it.%M(%T::result) }" else "return statement.%M { it.%M(%T::result) }.firstOrNull()",
 			MemberName("com.sorrowblue.kdbr.ktx", "query"),
@@ -244,10 +244,13 @@ class DaoProcessor : AbstractProcessor() {
 		)
 	}
 
-	private fun statementSetAllCodeBlock(sql: String, method: ExecutableElement): CodeBlock {
+	private fun statementSetAllCodeBlock(sql: String, method: ExecutableElement): CodeBlock? {
 		val regex = Regex(":\\w+?\\b")
 		val arguments = method.parameters.map(VariableElement::toString)
-		val placeHolders = regex.findAll(sql).map { it.value.substring(1, it.value.length) }
+		val placeHolders = regex.findAll(sql).map { it.value.substring(1, it.value.length) }.toList()
+		if (placeHolders.isEmpty()) {
+			return null
+		}
 		placeHolders.forEach {
 			if (!arguments.contains(it)) {
 				processingEnv.messager.printMessage(
@@ -257,7 +260,7 @@ class DaoProcessor : AbstractProcessor() {
 			}
 		}
 		return CodeBlock.builder().add(
-			"statement.%M(%L)",
+			"statement.%M(%L)\n",
 			MemberName("com.sorrowblue.kdbr.ktx", "setAll"),
 			placeHolders.joinToString(",")
 		).build()

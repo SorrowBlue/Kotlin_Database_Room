@@ -8,4 +8,10 @@ interface JobDao {
 
 	@Query("SELECT * FROM jobs")
 	fun getAll(): List<Job>
+
+	@Query("SELECT * FROM jobs WHERE id = :id")
+	fun get(id: Int): List<Job>
+
+	@Query("SELECT * FROM jobs WHERE name = :name")
+	fun find(name: String): List<Job>
 }
