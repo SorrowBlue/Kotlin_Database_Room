@@ -4,6 +4,7 @@ import com.google.auto.service.AutoService
 import com.sorrowblue.kdbr.*
 import com.sorrowblue.kdbr.compiler.ktx.*
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 import java.sql.Connection
 import javax.annotation.processing.AbstractProcessor
@@ -232,16 +233,26 @@ class DaoProcessor : AbstractProcessor() {
 		addStatement("println(sql)")
 		addStatement("val statement = connection.prepareStatement(sql)")
 		statementSetAllCodeBlock(query.sql, element)?.let { addCode(it) }
-		addStatement(
-			if (returnType.isCollection) "return statement.%M { it.%M(%T::result) }" else "return statement.%M { it.%M(%T::result) }.firstOrNull()",
-			MemberName("com.sorrowblue.kdbr.ktx", "query"),
-			MemberName("com.sorrowblue.kdbr.ktx", "map"),
-			entityClass
-		)
-		returns(
-			if (returnType.isCollection) element.returnType.asTypeName().kotlinType else element.returnType.asTypeName()
-				.copy(nullable = true)
-		)
+		if (query.anyList) {
+			addStatement("var index = 1")
+			addStatement(
+				"return statement.%M { it.%M { it.getObject(index++) } }",
+				MemberName("com.sorrowblue.kdbr.ktx", "query"),
+				MemberName("com.sorrowblue.kdbr.ktx", "map")
+			)
+			returns(LIST.parameterizedBy(Any::class.asTypeName().copy(true)))
+		} else {
+			addStatement(
+				"return statement.%M { it.%M(%T::result) }${if (returnType.isCollection) "" else ".firstOrNull()"}",
+				MemberName("com.sorrowblue.kdbr.ktx", "query"),
+				MemberName("com.sorrowblue.kdbr.ktx", "map"),
+				entityClass
+			)
+			returns(
+				if (returnType.isCollection) element.returnType.asTypeName().kotlinType else element.returnType.asTypeName()
+					.copy(nullable = true)
+			)
+		}
 	}
 
 	private fun statementSetAllCodeBlock(sql: String, method: ExecutableElement): CodeBlock? {
