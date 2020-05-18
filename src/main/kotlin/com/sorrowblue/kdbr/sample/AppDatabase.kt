@@ -3,6 +3,7 @@ package com.sorrowblue.kdbr.sample
 import com.sorrowblue.kdbr.Database
 import com.sorrowblue.kdbr.Room
 import com.sorrowblue.kdbr.RoomDatabase
+import com.sorrowblue.kdbr.sample.job.Job
 import com.sorrowblue.kdbr.sample.job.JobDao
 
 @Database
@@ -20,6 +21,8 @@ fun main() {
 	val database: AppDatabase = Room.databaseBuilder(AppDatabase::class.java)
 	println(database.jobDao().getAll())
 	println(database.jobDao().count().first())
+	println(database.jobDao().update(Job(1, "社長")))
+	println(database.jobDao().getAll())
 }
 
 

@@ -178,7 +178,7 @@ class DaoProcessor : AbstractProcessor() {
 			addStatement(
 				"val sql = %P",
 				CodeBlock.builder().add(
-					"UPDATE \${%1T.tableName} SET WHERE \${%1T.primaryLessColumnNames.joinToString(%2S) { %3P }} WHERE \${%1T.primaryColumn} = ?;",
+					"UPDATE \${%1T.tableName} SET \${%1T.primaryLessColumnNames.joinToString(%2S) { %3P }} WHERE \${%1T.primaryColumn} = ?;",
 					className,
 					",",
 					"\$it = ?"
@@ -187,7 +187,7 @@ class DaoProcessor : AbstractProcessor() {
 			addStatement("println(sql)")
 			addStatement("val statement = connection.prepareStatement(sql)")
 			addStatement(
-				"statement.%1M(*%2T.values($it).plus(%2T.primaryValue($it)).toTypedArray())",
+				"statement.%1M(*%2T.primaryLessValues($it).plus(%2T.primaryValue($it)).toTypedArray())",
 				MemberName("com.sorrowblue.kdbr.ktx", "setAll"), className
 			)
 			val isReturn = if (element.returnType.isInt) {

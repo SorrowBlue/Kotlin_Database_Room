@@ -78,6 +78,7 @@ class EntityProcessor : AbstractProcessor() {
 						.build()
 				)
 				objectBuilder.addFunction(valuesFunction(element, fieldNames, pk.autoIncrement, primaryKey))
+				objectBuilder.addFunction(primaryLessValuesFunction(element, fieldNames, pk.autoIncrement, primaryKey))
 				objectBuilder.addProperty(isAutoIncrementEnabled(pk.autoIncrement))
 				objectBuilder.addFunction(primaryValueFunction(element, primaryKeyType, primaryKey))
 				objectBuilder.addSuperinterface(
@@ -101,6 +102,16 @@ class EntityProcessor : AbstractProcessor() {
 			.addStatement(
 				"return listOf(%L)",
 				(if (autoIncrement) fieldNames.dropWhile { it == primaryKey } else fieldNames).joinToString(",") { "entity.$it" }
+			).build()
+
+
+	private fun primaryLessValuesFunction(element: Element, fieldNames: List<String>, autoIncrement: Boolean, primaryKey: String) =
+		FunSpec.builder(RoomEntity<*, *>::primaryLessValues.name).addModifiers(KModifier.OVERRIDE)
+			.addParameter("entity", element.asType().asTypeName())
+			.returns(LIST.parameterizedBy(Any::class.asTypeName().copy(nullable = true)))
+			.addStatement(
+				"return listOf(%L)",
+				(fieldNames.dropWhile { it == primaryKey }).joinToString(",") { "entity.$it" }
 			).build()
 
 

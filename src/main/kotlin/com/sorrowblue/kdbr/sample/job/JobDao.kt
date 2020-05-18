@@ -2,6 +2,7 @@ package com.sorrowblue.kdbr.sample.job
 
 import com.sorrowblue.kdbr.Dao
 import com.sorrowblue.kdbr.Query
+import com.sorrowblue.kdbr.Update
 import java.sql.ResultSet
 
 @Dao
@@ -18,4 +19,7 @@ interface JobDao {
 
 	@Query("SELECT count(*) FROM jobs;", true)
 	fun count(): List<Any?>
+
+	@Update
+	fun update(job: Job): Int
 }

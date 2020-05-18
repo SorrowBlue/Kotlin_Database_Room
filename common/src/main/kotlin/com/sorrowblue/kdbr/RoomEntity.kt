@@ -16,6 +16,8 @@ interface RoomEntity<T, P> {
 
 	fun values(entity: T): List<Any?>
 
+	fun primaryLessValues(entity: T): List<Any?>
+
 	fun result(rs: ResultSet): T
 
 	fun primaryValue(entity: T): P
