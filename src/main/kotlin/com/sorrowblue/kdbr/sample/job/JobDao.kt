@@ -1,9 +1,6 @@
 package com.sorrowblue.kdbr.sample.job
 
-import com.sorrowblue.kdbr.Dao
-import com.sorrowblue.kdbr.Insert
-import com.sorrowblue.kdbr.Query
-import com.sorrowblue.kdbr.Update
+import com.sorrowblue.kdbr.*
 import java.sql.ResultSet
 
 @Dao
@@ -26,4 +23,13 @@ interface JobDao {
 
 	@Insert
 	fun add(job: Job): Int
+
+	@Insert
+	fun addAll(vararg job: Job): Int
+
+	@Insert
+	fun addAll(jobs: List<Job>): Int
+
+	@Delete
+	fun delete(job: Job): Int
 }

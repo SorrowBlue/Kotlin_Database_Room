@@ -20,9 +20,10 @@ abstract class AppDatabase : RoomDatabase {
 fun main() {
 	val database: AppDatabase = Room.databaseBuilder(AppDatabase::class.java)
 	println(database.jobDao().getAll())
-	println(database.jobDao().count().first())
-	println(database.jobDao().update(Job(1, "社長")))
-	println(database.jobDao().getAll())
+//	println(database.jobDao().add(Job(14, "tesuto")))
+//	println(database.jobDao().getAll())
+//	println(database.jobDao().delete(Job(14, "tesuto")))
+//	println(database.jobDao().getAll())
 }
 
 

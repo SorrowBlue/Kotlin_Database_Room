@@ -76,7 +76,7 @@ class DaoProcessor : AbstractProcessor() {
 				addParameter(it.toString(), it.asType().genericType.kotlinType, KModifier.VARARG)
 				addStatement(
 					"var sql = %P",
-					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
+					CodeBlock.builder().add("INSERT INTO \${%T.tableName} (", className).build()
 				)
 				addStatement(
 					"val cn = if (%1T.isAutoIncrementEnabled) %1T.primaryLessColumnNames else %1T.columnNames",
@@ -86,7 +86,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement(
 					"sql += %P;",
 					CodeBlock.builder().add(
-						"VALUES \${$it.map { %1T.values(it).joinToString(%2S) { %3S } }.joinToString(%2S) {\"(\$it)\"}}",
+						") VALUES \${$it.map { %1T.values(it).joinToString(%2S) { %3S } }.joinToString(%2S) {\"(\$it)\"}}",
 						className,
 						",",
 						"?"
@@ -108,7 +108,7 @@ class DaoProcessor : AbstractProcessor() {
 				addParameter(it.toString(), it.asType().asTypeName().kotlinType)
 				addStatement(
 					"var sql = %P",
-					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
+					CodeBlock.builder().add("INSERT INTO \${%T.tableName} (", className).build()
 				)
 				addStatement(
 					"val cn = if (%1T.isAutoIncrementEnabled) %1T.primaryLessColumnNames else %1T.columnNames",
@@ -118,7 +118,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement(
 					"sql += %P;",
 					CodeBlock.builder().add(
-						"VALUES \${$it.map { %1T.values(it).joinToString(%2S) { %3S } }.joinToString(%2S) {\"(\$it)\"}}",
+						") VALUES \${$it.map { %1T.values(it).joinToString(%2S) { %3S } }.joinToString(%2S) {\"(\$it)\"}}",
 						className,
 						",",
 						"?"
@@ -140,7 +140,7 @@ class DaoProcessor : AbstractProcessor() {
 				addParameter(it.toString(), it.asType().asTypeName())
 				addStatement(
 					"var sql = %P",
-					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
+					CodeBlock.builder().add("INSERT INTO \${%T.tableName} (", className).build()
 				)
 				addStatement(
 					"val cn = if (%1T.isAutoIncrementEnabled) %1T.primaryLessColumnNames else %1T.columnNames",
@@ -149,7 +149,7 @@ class DaoProcessor : AbstractProcessor() {
 				addStatement("sql += cn.joinToString(%S)", ",")
 				addStatement(
 					"sql += %P;",
-					CodeBlock.builder().add("VALUES(\${%T.values($it).joinToString(%S) { %S } })", className, ",", "?")
+					CodeBlock.builder().add(") VALUES(\${%T.values($it).joinToString(%S) { %S } })", className, ",", "?")
 						.build()
 				)
 				addStatement("println(sql)")
