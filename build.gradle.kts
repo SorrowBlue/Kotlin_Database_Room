@@ -15,8 +15,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(project(":common"))
     kapt(project(":compiler"))
-//    implementation("com.sorrowblue.kdbr:common:0.1.1")
-//    kapt("com.sorrowblue.kdbr:compiler:0.1.1")
+//    implementation("com.sorrowblue.kdbr:common:0.1.4")
+//    kapt("com.sorrowblue.kdbr:compiler:0.1.4")
     implementation("org.postgresql:postgresql:42.2.12")
 }
 

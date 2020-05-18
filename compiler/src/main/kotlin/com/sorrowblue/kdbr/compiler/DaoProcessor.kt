@@ -75,7 +75,7 @@ class DaoProcessor : AbstractProcessor() {
 				)
 				addParameter(it.toString(), it.asType().genericType.kotlinType, KModifier.VARARG)
 				addStatement(
-					"var sql = %S",
+					"var sql = %P",
 					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
 				)
 				addStatement(
@@ -107,7 +107,7 @@ class DaoProcessor : AbstractProcessor() {
 				)
 				addParameter(it.toString(), it.asType().asTypeName().kotlinType)
 				addStatement(
-					"var sql = %S",
+					"var sql = %P",
 					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
 				)
 				addStatement(
@@ -139,7 +139,7 @@ class DaoProcessor : AbstractProcessor() {
 				)
 				addParameter(it.toString(), it.asType().asTypeName())
 				addStatement(
-					"var sql = %S",
+					"var sql = %P",
 					CodeBlock.builder().add("INSERT INTO \${%T.tableName}", className).build()
 				)
 				addStatement(
